@@ -21,7 +21,7 @@ public class BaseRepository<T, TId> : IBaseRepository<T, TId>
         return (await _entities.AddAsync(entity)).Entity;
     }
 
-    public virtual void Delete(T entity)
+    public virtual void Remove(T entity)
     {
         _entities.Remove(entity);
     }

@@ -9,6 +9,6 @@ public class DeclarationMappings : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<Declaration, DeclarationDto>()
-            .Map(dest => dest.ImageBase64, src => src.Image.GetBase64String());
+            .Map(dest => dest.ImageBase64, src => src.Image.ConvertImageDataAsBase64());
     }
 }

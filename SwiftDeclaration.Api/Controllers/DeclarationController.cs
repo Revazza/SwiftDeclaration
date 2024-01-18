@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
+using SwiftDeclaration.Application.Declarations.Commands.RemoveDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
 
 namespace SwiftDeclaration.Api.Controllers;
@@ -24,12 +25,18 @@ public class DeclarationController : ControllerBase
         return Ok(result);
     }
 
-
     [HttpPut]
     public async Task<IActionResult> UpdateDeclaration([FromForm] UpdateDeclarationCommand command)
     {
         var result = await _mediator.Send(command);
         return Ok(result);
+    }
+
+    [HttpDelete("{declarationId}")]
+    public async Task<IActionResult> RemoveDeclaration(int declarationId)
+    {
+        await _mediator.Send(new RemoveDeclarationCommand(declarationId));
+        return Ok();
     }
 
 }

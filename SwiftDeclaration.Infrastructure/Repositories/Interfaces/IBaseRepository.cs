@@ -7,7 +7,7 @@ public interface IBaseRepository<T, TId>
     IQueryable<T> AsQuery();
     Task<T?> GetByIdAsync(TId id);
     void Update(T entity);
-    void Delete(T entity);
+    void Remove(T entity);
 }
 
 

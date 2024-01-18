@@ -27,9 +27,9 @@ public record Image
     }
 
     /// <summary>
-    /// Get the Base64 string representation of the image data
+    /// Converts the Base64 string representation of the image data
     /// </summary>
-    public string GetBase64String()
+    public string ConvertImageDataAsBase64()
     {
         if (!Data.Any())
         {
