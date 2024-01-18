@@ -1,14 +1,13 @@
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SwiftDeclaration.Domain.Entities.Declarations;
 using SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 
 namespace SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
 
-public record GetAllDeclarationBriefDetailsQuery() : IRequest<List<GetAllDeclarationsBriefDetailsQueryResponse>>;
-
 public class GetAllDeclarationsBriefDetailsQueryHandler
-    : IRequestHandler<GetAllDeclarationBriefDetailsQuery, List<GetAllDeclarationsBriefDetailsQueryResponse>>
+    : IRequestHandler<GetAllDeclarationsBriefDetailsQuery, List<GetAllDeclarationsBriefDetailsQueryResponse>>
 {
     private readonly IDeclarationRepository _declarationRepository;
 
@@ -18,12 +17,28 @@ public class GetAllDeclarationsBriefDetailsQueryHandler
     }
 
     public async Task<List<GetAllDeclarationsBriefDetailsQueryResponse>> Handle(
-        GetAllDeclarationBriefDetailsQuery request, CancellationToken cancellationToken)
+        GetAllDeclarationsBriefDetailsQuery request, CancellationToken cancellationToken)
     {
-        return await _declarationRepository
+        var query = _declarationRepository
             .AsQuery()
-            .AsNoTracking()
+            .AsNoTracking();
+
+        query = ApplyFilters(query, request);
+
+        return await query
             .ProjectToType<GetAllDeclarationsBriefDetailsQueryResponse>()
             .ToListAsync(cancellationToken);
     }
+
+    private static IQueryable<Declaration> ApplyFilters(
+        IQueryable<Declaration> query,
+        GetAllDeclarationsBriefDetailsQuery request)
+    {
+        query = FilterByHeadline(query, request.Headline);
+        return query;
+    }
+
+    private static IQueryable<Declaration> FilterByHeadline(IQueryable<Declaration> query, string headLine)
+        => string.IsNullOrEmpty(headLine) ? query : query.Where(x => x.HeadLine.StartsWith(headLine));
+
 }

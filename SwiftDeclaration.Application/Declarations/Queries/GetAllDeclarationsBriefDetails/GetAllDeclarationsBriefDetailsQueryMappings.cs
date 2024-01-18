@@ -3,7 +3,7 @@ using SwiftDeclaration.Domain.Entities.Declarations;
 
 namespace SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
 
-public class GetAllDeclarationBriefDetailsQueryMappings : IRegister
+public class GetAllDeclarationsBriefDetailsQueryMappings : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

@@ -5,6 +5,8 @@ using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.RemoveDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
 using SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
+using SwiftDeclaration.Application.Declarations.Queries.GetDeclarationById;
+using SwiftDeclaration.Infrastructure.Models;
 
 namespace SwiftDeclaration.Api.Controllers;
 [Route("api/v1/declarations")]
@@ -40,11 +42,18 @@ public class DeclarationController : ControllerBase
         return Ok();
     }
 
-    [HttpGet("brief-details")]
-    public async Task<IActionResult> GetAllDeclarationsBriefDetails()
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDeclarationById(int id)
     {
-        var result = await _mediator.Send(new GetAllDeclarationBriefDetailsQuery());
-        return Ok(result);
+        var result = await _mediator.Send(new GetDeclarationByIdQuery(id));
+        return Ok(HttpResult.Ok(result));
+    }
+
+    [HttpGet("brief-details")]
+    public async Task<IActionResult> GetAllDeclarationsBriefDetails([FromQuery] GetAllDeclarationsBriefDetailsQuery query)
+    {
+        var result = await _mediator.Send(query);
+        return Ok(HttpResult.Ok(result));
     }
 
 }
