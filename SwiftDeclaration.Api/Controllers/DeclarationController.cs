@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
-using SwiftDeclaration.Application.Declarations.Dtos;
+using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
 
 namespace SwiftDeclaration.Api.Controllers;
 [Route("api/v1/declarations")]
@@ -16,11 +16,20 @@ public class DeclarationController : ControllerBase
         _mediator = mediator;
     }
 
+
     [HttpPost]
     public async Task<IActionResult> AddDeclaration([FromForm] AddDeclarationCommand command)
     {
         var result = await _mediator.Send(command);
-        return Ok(result.Adapt<DeclarationDto>());
+        return Ok(result);
+    }
+
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateDeclaration([FromForm] UpdateDeclarationCommand command)
+    {
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
 
 }

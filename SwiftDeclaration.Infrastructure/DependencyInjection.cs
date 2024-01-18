@@ -1,4 +1,6 @@
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using SwiftDeclaration.Infrastructure.Behaviours;
 using SwiftDeclaration.Infrastructure.Repositories;
 using SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 using SwiftDeclaration.Infrastructure.Services;
@@ -17,6 +19,7 @@ public static class DependencyInjection
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehaviour<,>))
             .AddScoped<IUnitOfWork, UnitOfWork>()
             .AddScoped<IDeclarationRepository, DeclarationRepository>();
     }

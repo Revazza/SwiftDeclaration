@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using SwiftDeclaration.Domain.ValueObjects.Images;
 
 namespace SwiftDeclaration.Domain.Entities.Declarations;
@@ -41,6 +42,11 @@ public class Declaration
         Description = string.Empty;
         PhoneNumber = string.Empty;
         Image = new Image(string.Empty, Array.Empty<byte>());
+    }
+
+    public void SetImage(IFormFile file)
+    {
+        Image = ImageHelper.ConvertFormFileToImage(file);
     }
 
 }

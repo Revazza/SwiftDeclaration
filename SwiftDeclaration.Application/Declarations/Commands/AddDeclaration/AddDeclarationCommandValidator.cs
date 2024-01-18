@@ -9,15 +9,19 @@ public class AddDeclarationCommandValidator : AbstractValidator<AddDeclarationCo
     public AddDeclarationCommandValidator()
     {
         RuleFor(x => x.HeadLine)
+            .NotEmpty()
             .ValidateHeadLine();
 
         RuleFor(x => x.Description)
+            .NotEmpty()
             .ValidateDescription();
 
         RuleFor(x => x.PhoneNumber)
+            .NotEmpty()
             .ValidatePhoneNumber();
 
         RuleFor(x => x.File)
+            .NotNull()
             .ValidateFile();
     }
 

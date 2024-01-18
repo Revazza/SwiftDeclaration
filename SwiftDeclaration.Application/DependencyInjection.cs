@@ -2,8 +2,6 @@ using FluentValidation;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using SwiftDeclaration.Application.Services;
-using SwiftDeclaration.Application.Services.Interfaces;
 using System.Reflection;
 
 namespace SwiftDeclaration.Application;
@@ -23,8 +21,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddCustomServices(this IServiceCollection services)
     {
-        return services
-            .AddTransient<IImageProcessingService, ImageProcessingService>();
+        return services;
     }
 
     private static IServiceCollection AddMappingsConfigurations(this IServiceCollection services)

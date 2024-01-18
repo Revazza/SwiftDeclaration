@@ -12,23 +12,20 @@ public static class DeclarationValidationRules
 {
     public static IRuleBuilderOptions<T, string?> ValidateHeadLine<T>(this IRuleBuilder<T, string?> ruleBuilder)
         => ruleBuilder
-        .NotEmpty()
         .MaximumLength(DeclarationOptions.MaxHeadLineLength);
 
     public static IRuleBuilderOptions<T, string?> ValidateDescription<T>(this IRuleBuilder<T, string?> ruleBuilder)
         => ruleBuilder
-        .NotEmpty()
         .MaximumLength(DeclarationOptions.MaxDescriptionLength);
 
     public static IRuleBuilderOptions<T, string?> ValidatePhoneNumber<T>(this IRuleBuilder<T, string?> ruleBuilder)
         => ruleBuilder
         .Matches(DeclarationOptions.PhoneNumberRegex)
         .WithMessage(DeclarationErrorMessages.InvalidPhoneNumberFormat)
-        .MaximumLength(DeclarationOptions.MaxHeadLineLength);
+        .MaximumLength(DeclarationOptions.MaxPhoneNumberLength);
 
     public static IRuleBuilderOptions<T, IFormFile?> ValidateFile<T>(this IRuleBuilder<T, IFormFile?> ruleBuilder)
        => ruleBuilder
-        .NotNull()
         .Must(file => file.Length <= (int)ImageOptions.MaxFileSize)
         .WithMessage(ImageErrorMessages.ImageSizeExceeded);
 

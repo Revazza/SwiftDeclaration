@@ -7,6 +7,5 @@ public class AddDeclarationCommandMappings : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        
     }
 }
