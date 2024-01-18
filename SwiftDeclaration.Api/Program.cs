@@ -1,3 +1,5 @@
+using SwiftDeclaration.Application;
+using SwiftDeclaration.Infrastructure;
 using SwiftDeclaration.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
+    .AddApplication()
+    .AddInfrastructure()
     .AddPersistance(builder.Configuration);
 
 var app = builder.Build();

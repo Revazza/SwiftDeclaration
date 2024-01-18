@@ -1,4 +1,4 @@
-﻿namespace SwiftDeclaration.Persistance.Repositories.Interfaces;
+﻿namespace SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 
 public interface IBaseRepository<T, TId>
     where T : class
@@ -8,7 +8,6 @@ public interface IBaseRepository<T, TId>
     Task<T?> GetByIdAsync(TId id);
     void Update(T entity);
     void Delete(T entity);
-    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }
 
 

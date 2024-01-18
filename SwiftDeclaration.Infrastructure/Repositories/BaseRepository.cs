@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using SwiftDeclaration.Persistance.Repositories.Interfaces;
 using SwiftDeclaration.Persistance.Context;
+using SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 
-namespace SwiftDeclaration.Persistance.Repositories;
+namespace SwiftDeclaration.Infrastructure.Repositories;
 
 public class BaseRepository<T, TId> : IBaseRepository<T, TId>
     where T : class
@@ -39,11 +39,6 @@ public class BaseRepository<T, TId> : IBaseRepository<T, TId>
     public virtual void Update(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
-    }
-
-    public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        await _context.SaveChangesAsync(cancellationToken);
     }
 
 }

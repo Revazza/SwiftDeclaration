@@ -1,8 +1,8 @@
 using SwiftDeclaration.Domain.Entities.Declarations;
+using SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 using SwiftDeclaration.Persistance.Context;
-using SwiftDeclaration.Persistance.Repositories.Interfaces;
 
-namespace SwiftDeclaration.Persistance.Repositories;
+namespace SwiftDeclaration.Infrastructure.Repositories;
 
 public class DeclarationRepository : BaseRepository<Declaration, int>, IDeclarationRepository
 {

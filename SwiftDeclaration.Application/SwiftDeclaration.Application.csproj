@@ -13,12 +13,14 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SwiftDeclaration.Domain\SwiftDeclaration.Domain.csproj" />
+    <ProjectReference Include="..\SwiftDeclaration.Infrastructure\SwiftDeclaration.Infrastructure.csproj" />
     <ProjectReference Include="..\SwiftDeclaration.Persistance\SwiftDeclaration.Persistance.csproj" />
   </ItemGroup>
 

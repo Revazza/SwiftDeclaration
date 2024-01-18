@@ -25,4 +25,17 @@ public record Image
         this.FileName = FileName;
         this.Data = Data;
     }
+
+    /// <summary>
+    /// Get the Base64 string representation of the image data
+    /// </summary>
+    public string GetBase64String()
+    {
+        if (!Data.Any())
+        {
+            return string.Empty;
+        }
+
+        return $"data:{FileName};base64,{Convert.ToBase64String(Data)}";
+    }
 }

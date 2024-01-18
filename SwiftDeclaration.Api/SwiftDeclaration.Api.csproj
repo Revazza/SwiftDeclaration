@@ -16,10 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\SwiftDeclaration.Application\SwiftDeclaration.Application.csproj" />
+    <ProjectReference Include="..\SwiftDeclaration.Infrastructure\SwiftDeclaration.Infrastructure.csproj" />
     <ProjectReference Include="..\SwiftDeclaration.Persistance\SwiftDeclaration.Persistance.csproj" />
   </ItemGroup>
 
