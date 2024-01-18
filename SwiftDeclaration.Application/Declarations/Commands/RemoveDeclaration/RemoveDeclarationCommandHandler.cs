@@ -1,4 +1,5 @@
 using MediatR;
+using SwiftDeclaration.Application.Declarations.Queries.GetDeclarationById;
 using SwiftDeclaration.Infrastructure.Repositories.Interfaces;
 using SwiftDeclaration.Infrastructure.Services.Interfaces;
 
@@ -9,20 +10,24 @@ public record RemoveDeclarationCommand(int DeclarationId) : IRequest;
 public class RemoveDeclarationCommandHandler : IRequestHandler<RemoveDeclarationCommand>
 {
     private readonly IDeclarationRepository _declarationRepository;
+    private readonly ISender _mediator;
     private readonly IUnitOfWork _unitOfWork;
 
     public RemoveDeclarationCommandHandler(
         IUnitOfWork unitOfWork,
-        IDeclarationRepository declarationRepository)
+        IDeclarationRepository declarationRepository,
+        ISender mediator)
     {
         _unitOfWork = unitOfWork;
         _declarationRepository = declarationRepository;
+        _mediator = mediator;
     }
 
     public async Task Handle(RemoveDeclarationCommand request, CancellationToken cancellationToken)
     {
-        var declaration = await _declarationRepository.GetByIdAsync(request.DeclarationId)
-            ?? throw new Exception("");
+        var declaration = await _mediator
+            .Send(new GetDeclarationByIdQuery(request.DeclarationId), cancellationToken)
+            ?? throw new Exception();
 
         _declarationRepository.Remove(declaration);
 

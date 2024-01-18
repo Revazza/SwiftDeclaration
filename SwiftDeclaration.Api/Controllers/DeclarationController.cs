@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.RemoveDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
+using SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
 
 namespace SwiftDeclaration.Api.Controllers;
 [Route("api/v1/declarations")]
@@ -37,6 +38,13 @@ public class DeclarationController : ControllerBase
     {
         await _mediator.Send(new RemoveDeclarationCommand(declarationId));
         return Ok();
+    }
+
+    [HttpGet("brief-details")]
+    public async Task<IActionResult> GetAllDeclarationsBriefDetails()
+    {
+        var result = await _mediator.Send(new GetAllDeclarationBriefDetailsQuery());
+        return Ok(result);
     }
 
 }
