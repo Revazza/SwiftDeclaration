@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SwiftDeclaration.Persistance.Context;
+using SwiftDeclaration.Persistance.Repositories;
+using SwiftDeclaration.Persistance.Repositories.Interfaces;
 
 namespace SwiftDeclaration.Persistance;
 
@@ -13,7 +15,13 @@ public static class DependencyInjection
     {
 
         return services
-            .ConfigureDbContext(configuration);
+            .ConfigureDbContext(configuration)
+            .AddCustomRepositories();
+    }
+
+    private static IServiceCollection AddCustomRepositories(this IServiceCollection services)
+    {
+        return services.AddScoped<IDeclarationRepository, DeclarationRepository>();
     }
 
     private static IServiceCollection ConfigureDbContext(
