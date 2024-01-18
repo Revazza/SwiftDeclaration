@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SwiftDeclaration.Domain.Constants;
 using SwiftDeclaration.Domain.Entities.Declarations;
+using SwiftDeclaration.Domain.ValueObjects.Images;
 
 namespace SwiftDeclaration.Persistance.Configurations;
 
@@ -28,7 +29,15 @@ public class DeclarationConfigurations : IEntityTypeConfiguration<Declaration>
             .IsRequired()
             .HasMaxLength(DeclarationOptions.MaxPhoneNumberLength);
 
-        builder.OwnsOne(x => x.Image);
+        builder.OwnsOne(x => x.Image, img =>
+        {
+            img.Property(i => i.FileName)
+                .HasMaxLength(ImageOptions.MaxFileNameLength)
+                .IsRequired();
+
+            img.Property(i => i.Data)
+                .IsRequired();
+        });
 
     }
 }
