@@ -8,7 +8,7 @@ public class AddDeclarationCommandValidator : AbstractValidator<AddDeclarationCo
 
     public AddDeclarationCommandValidator()
     {
-        RuleFor(x => x.HeadLine)
+        RuleFor(x => x.Headline)
             .NotEmpty()
             .ValidateHeadLine();
 

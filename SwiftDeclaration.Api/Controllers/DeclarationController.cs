@@ -28,7 +28,7 @@ public class DeclarationController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut]
+    [HttpPost("update")]
     public async Task<IActionResult> UpdateDeclaration([FromForm] UpdateDeclarationCommand command)
     {
         var result = await _mediator.Send(command);

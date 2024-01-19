@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
+using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
 using SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
 using SwiftDeclaration.Infrastructure.Models;
 using SwiftDeclaration.Presentation.Services;
@@ -29,11 +30,24 @@ public class DeclarationController : Controller
         return View();
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateDeclaration(UpdateDeclarationCommand command)
+    {
+        await _httpClientService.PostMultipartFormDataAsync("api/v1/declarations/update", command);
+        return RedirectToAction("Index");
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateDeclaration(AddDeclarationCommand command)
     {
-
-        return View();
+        await _httpClientService.PostMultipartFormDataAsync("api/v1/declarations", command);
+        return RedirectToAction("Index");
     }
 
 }

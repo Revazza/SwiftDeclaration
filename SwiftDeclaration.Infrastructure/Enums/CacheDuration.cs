@@ -5,7 +5,8 @@ namespace SwiftDeclaration.Infrastructure.Enums;
 /// </summary>
 public enum CacheDuration
 {
-    OneMinute = 3600,
+    ThirtySeconds = 30,
+    OneMinute = 60,
     FiveMinutes = OneMinute * 5,
     TenMinutes = OneMinute * 10,
     ThirtyMinutes = OneMinute * 30,

@@ -55,7 +55,7 @@ public class QueryCachingBehaviour<TRequest, TResponse>
             return result;
         }
 
-        _cachingService.SetData(cacheKey, result);
+        _cachingService.SetData(cacheKey, result, cacheOptions.Duration);
 
         return result;
     }
