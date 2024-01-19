@@ -14,13 +14,13 @@ public class DeclarationConfigurations : IEntityTypeConfiguration<Declaration>
         builder.Property(x => x.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property(x => x.HeadLine)
+        builder.Property(x => x.Headline)
             .IsRequired()
             .HasMaxLength(DeclarationOptions.MaxHeadLineLength)
             .UseCollation(CollationConstants.CaseInsensitivity);
 
         // Adding an index on HeadLine for optimized searching of declarations by head line
-        builder.HasIndex(x => x.HeadLine);
+        builder.HasIndex(x => x.Headline);
 
         builder.Property(x => x.Description)
             .IsRequired()

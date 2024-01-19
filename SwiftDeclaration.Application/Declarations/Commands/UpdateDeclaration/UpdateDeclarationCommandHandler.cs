@@ -43,7 +43,7 @@ public class UpdateDeclarationCommandHandler : IRequestHandler<UpdateDeclaration
     }
 
     private static void UpdateHeadLineIfNotEmpty(Declaration declaration, string headLine)
-        => declaration.HeadLine = string.IsNullOrEmpty(headLine) ? declaration.HeadLine : headLine;
+        => declaration.Headline = string.IsNullOrEmpty(headLine) ? declaration.Headline : headLine;
 
     private static void UpdateDescriptionIfNotEmpty(Declaration declaration, string description)
         => declaration.Description = string.IsNullOrEmpty(description) ? declaration.Description : description;

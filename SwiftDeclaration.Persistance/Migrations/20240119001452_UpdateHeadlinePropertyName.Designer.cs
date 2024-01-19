@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftDeclaration.Persistance.Context;
 
@@ -10,9 +11,11 @@ using SwiftDeclaration.Persistance.Context;
 namespace SwiftDeclaration.Persistance.Migrations
 {
     [DbContext(typeof(SwiftDeclarationDbContext))]
-    partial class SwiftDeclarationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119001452_UpdateHeadlinePropertyName")]
+    partial class UpdateHeadlinePropertyName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

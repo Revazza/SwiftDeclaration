@@ -16,7 +16,7 @@ public class Declaration
     /// <summary>
     /// Gets or sets the headline of the declaration
     /// </summary>
-    public string HeadLine { get; set; }
+    public string Headline { get; set; }
 
     /// <summary>
     /// Gets or sets the detailed description of the declaration
@@ -38,7 +38,7 @@ public class Declaration
     /// </summary>
     public Declaration()
     {
-        HeadLine = string.Empty;
+        Headline = string.Empty;
         Description = string.Empty;
         PhoneNumber = string.Empty;
         Image = new Image(string.Empty, Array.Empty<byte>());

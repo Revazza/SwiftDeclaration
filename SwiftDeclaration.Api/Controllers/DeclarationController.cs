@@ -50,9 +50,9 @@ public class DeclarationController : ControllerBase
     }
 
     [HttpGet("brief-details")]
-    public async Task<IActionResult> GetAllDeclarationsBriefDetails([FromQuery] GetAllDeclarationsBriefDetailsQuery query)
+    public async Task<IActionResult> GetAllDeclarationsBriefDetails(string headline = "")
     {
-        var result = await _mediator.Send(query);
+        var result = await _mediator.Send(new GetAllDeclarationsBriefDetailsQuery(headline));
         return Ok(HttpResult.Ok(result));
     }
 

@@ -39,6 +39,6 @@ public class GetAllDeclarationsBriefDetailsQueryHandler
     }
 
     private static IQueryable<Declaration> FilterByHeadline(IQueryable<Declaration> query, string headLine)
-        => string.IsNullOrEmpty(headLine) ? query : query.Where(x => x.HeadLine.StartsWith(headLine));
+        => string.IsNullOrEmpty(headLine) ? query : query.Where(x => x.Headline.StartsWith(headLine));
 
 }
