@@ -9,4 +9,4 @@ public record UpdateDeclarationCommand(
     string HeadLine = "",
     string Description = "",
     string PhoneNumber = "",
-    IFormFile File = null!) : IRequest<HttpResult>;
+    IFormFile? File = null) : IRequest<HttpResult>;

@@ -7,10 +7,11 @@ public class UpdateDeclarationCommandValidator : AbstractValidator<UpdateDeclara
 {
     public UpdateDeclarationCommandValidator()
     {
+        RuleFor(x => x.Id).GreaterThan(0);
+
         RuleFor(x => x)
             .Must(x => !IsAllPropertiesNullOrEmpty(x))
             .WithMessage("At least one of the properties (HeadLine, Description, PhoneNumber, or File) must be provided");
-        RuleFor(x => x.Id).GreaterThan(2);
 
         RuleFor(x => x.HeadLine)
             .ValidateHeadLine()
@@ -26,7 +27,7 @@ public class UpdateDeclarationCommandValidator : AbstractValidator<UpdateDeclara
 
         RuleFor(x => x.File)
             .ValidateFile()
-            .When(x => x is not null);
+            .When(x => x.File is not null);
 
     }
 

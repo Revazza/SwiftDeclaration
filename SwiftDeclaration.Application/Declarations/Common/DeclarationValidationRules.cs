@@ -26,7 +26,7 @@ public static class DeclarationValidationRules
 
     public static IRuleBuilderOptions<T, IFormFile?> ValidateFile<T>(this IRuleBuilder<T, IFormFile?> ruleBuilder)
        => ruleBuilder
-        .Must(file => file.Length <= (int)ImageOptions.MaxFileSize)
+        .Must(file => file?.Length <= (int)ImageOptions.MaxFileSize)
         .WithMessage(ImageErrorMessages.ImageSizeExceeded);
 
 }
