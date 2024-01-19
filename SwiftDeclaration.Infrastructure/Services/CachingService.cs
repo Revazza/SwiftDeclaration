@@ -10,6 +10,7 @@ namespace SwiftDeclaration.Infrastructure.Services;
 public class CachingService : ICachingService
 {
     private readonly IMemoryCache _cache;
+    private readonly HashSet<string> _cacheKeys;
 
     /// <summary>
     /// Initializes a new instance of the CachingService class
@@ -18,6 +19,7 @@ public class CachingService : ICachingService
     public CachingService(IMemoryCache cache)
     {
         _cache = cache;
+        _cacheKeys = new();
     }
 
     /// <summary>
@@ -51,13 +53,28 @@ public class CachingService : ICachingService
             return false;
         }
 
-        var cacheOptions = new MemoryCacheEntryOptions()
-            .SetAbsoluteExpiration(DateTime.UtcNow.AddSeconds((int)duration));
-
+        var cacheOptions = ConfigureCacheOptions((int)duration);
         _cache.Set(key, data, cacheOptions);
+        _cacheKeys.Add(key);
         return true;
+    }
+
+    public void ClearCache()
+    {
+        var memoryCache = _cache as MemoryCache;
+        memoryCache?.Clear();
     }
 
     private bool KeyExists(string key) => _cache.TryGetValue(key, out _);
 
+    private MemoryCacheEntryOptions ConfigureCacheOptions(int durationInSeconds)
+        => new MemoryCacheEntryOptions()
+        {
+
+        }
+        .SetAbsoluteExpiration(DateTime.UtcNow.AddSeconds(durationInSeconds))
+        .RegisterPostEvictionCallback((evictedKey, evictedValue, reason, state) =>
+        {
+            _cacheKeys.Remove(evictedKey.ToString()!);
+        });
 }

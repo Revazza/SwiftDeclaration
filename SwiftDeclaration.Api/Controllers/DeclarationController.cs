@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.RemoveDeclaration;
 using SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
+using SwiftDeclaration.Application.Declarations.Dtos;
 using SwiftDeclaration.Application.Declarations.Queries.GetAllDeclarationsBriefDetails;
 using SwiftDeclaration.Application.Declarations.Queries.GetDeclarationById;
 using SwiftDeclaration.Infrastructure.Models;
@@ -46,7 +47,7 @@ public class DeclarationController : ControllerBase
     public async Task<IActionResult> GetDeclarationById(int id)
     {
         var result = await _mediator.Send(new GetDeclarationByIdQuery(id));
-        return Ok(HttpResult.Ok(result));
+        return Ok(HttpResult.Ok(result.Adapt<DeclarationDto>()));
     }
 
     [HttpGet("brief-details")]

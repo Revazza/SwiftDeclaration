@@ -13,14 +13,17 @@ namespace SwiftDeclaration.Application.Declarations.Commands.UpdateDeclaration;
 public class UpdateDeclarationCommandHandler : IRequestHandler<UpdateDeclarationCommand, HttpResult>
 {
     private readonly IDeclarationRepository _declarationRepository;
+    private readonly ICachingService _cachingService;
     private readonly IUnitOfWork _unitOfWork;
 
     public UpdateDeclarationCommandHandler(
         IUnitOfWork unitOfWork,
-        IDeclarationRepository declarationRepository)
+        IDeclarationRepository declarationRepository,
+        ICachingService cachingService)
     {
         _unitOfWork = unitOfWork;
         _declarationRepository = declarationRepository;
+        _cachingService = cachingService;
     }
 
     public async Task<HttpResult> Handle(UpdateDeclarationCommand request, CancellationToken cancellationToken)
@@ -31,6 +34,8 @@ public class UpdateDeclarationCommandHandler : IRequestHandler<UpdateDeclaration
         UpdateProperties(declaration, request);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        _cachingService.ClearCache();
         return HttpResult.Ok(declaration.Adapt<DeclarationDto>());
     }
 

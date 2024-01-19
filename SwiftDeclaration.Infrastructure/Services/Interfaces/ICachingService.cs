@@ -21,4 +21,7 @@ public interface ICachingService
     /// <param name="duration">The duration for which the data should be cached</param>
     /// <returns>True if the data was successfully cached; otherwise, false if the key already exists</returns>
     bool SetData<TData>(string key, TData data, CacheDuration duration = CacheDuration.OneMinute);
+
+    void ClearCache();
+
 }

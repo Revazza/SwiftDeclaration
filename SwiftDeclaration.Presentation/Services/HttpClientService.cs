@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Azure;
+using Newtonsoft.Json;
 using SwiftDeclaration.Application.Declarations.Commands.AddDeclaration;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -12,6 +13,7 @@ public interface IHttpClientService
     Task<TResponse> PostAsync<TResponse>(string url, object data);
     Task PostMultipartFormDataAsync(string ulr, object data);
     Task PostAsync(string url, object data);
+    Task DeleteAsync(string url);
 }
 
 public class HttpClientService : IHttpClientService
@@ -56,7 +58,6 @@ public class HttpClientService : IHttpClientService
 
         if (!response.IsSuccessStatusCode)
         {
-            string responseContent = await response.Content.ReadAsStringAsync();
             throw new Exception(response.ReasonPhrase);
         }
 
@@ -100,4 +101,13 @@ public class HttpClientService : IHttpClientService
         return await response.Content.ReadAsStringAsync();
     }
 
+    public async Task DeleteAsync(string url)
+    {
+        var response = await _httpClient.DeleteAsync(url);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(response.ReasonPhrase);
+        }
+    }
 }

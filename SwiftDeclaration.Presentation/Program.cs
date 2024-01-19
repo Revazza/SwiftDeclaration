@@ -1,6 +1,3 @@
-using SwiftDeclaration.Application;
-using SwiftDeclaration.Infrastructure;
-using SwiftDeclaration.Persistance;
 using SwiftDeclaration.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +23,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Declaration}/{action=Index}/{id?}");
 
 app.Run();

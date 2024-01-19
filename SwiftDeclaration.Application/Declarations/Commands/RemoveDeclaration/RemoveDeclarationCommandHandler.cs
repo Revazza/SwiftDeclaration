@@ -11,16 +11,19 @@ public class RemoveDeclarationCommandHandler : IRequestHandler<RemoveDeclaration
 {
     private readonly IDeclarationRepository _declarationRepository;
     private readonly ISender _mediator;
+    private readonly ICachingService _cachingService;
     private readonly IUnitOfWork _unitOfWork;
 
     public RemoveDeclarationCommandHandler(
         IUnitOfWork unitOfWork,
         IDeclarationRepository declarationRepository,
-        ISender mediator)
+        ISender mediator,
+        ICachingService cachingService)
     {
         _unitOfWork = unitOfWork;
         _declarationRepository = declarationRepository;
         _mediator = mediator;
+        _cachingService = cachingService;
     }
 
     public async Task Handle(RemoveDeclarationCommand request, CancellationToken cancellationToken)
@@ -32,5 +35,7 @@ public class RemoveDeclarationCommandHandler : IRequestHandler<RemoveDeclaration
         _declarationRepository.Remove(declaration);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        _cachingService.ClearCache();
     }
 }
